@@ -1,0 +1,45 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #828383, #b6cff3);
+    font-family: "Apple SD Gothic Neo", sans-serif;
+}
+
+.loginForm button{
+    background-color: rgb(193, 182, 182);
+    color: black;
+    border: 2px solid rgb(125, 121, 121);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.loginForm button:hover{
+    background-color: black;
+    color: white;
+}
+
+.loginForm input{
+    background-color: white;
+    color: black;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.loginContainer{
+    background: white;
+    padding: 2rem;
+    width: 350px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+}

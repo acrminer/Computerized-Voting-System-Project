@@ -1,0 +1,28 @@
+package com.voting_system.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class PageController {
+
+    @GetMapping("/")
+    public String showLoginPage() {
+        return "login";
+    }
+
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
+    @GetMapping("/index")
+    public String indexPage() {
+        return "index";
+    }
+
+    @GetMapping("/register")
+    public String registerPage() {
+        return "register";
+    }
+}
