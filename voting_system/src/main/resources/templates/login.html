@@ -28,7 +28,8 @@
       const response = await fetch('/loginVoter', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password }),
+        credentials: "include"
       });
 
       const message = document.getElementById('message');
@@ -38,7 +39,7 @@
           message.textContent = text;
           message.style.color = "green";
           setTimeout(() => {
-            window.location.href = "/index"; // Needs to be changed to redirect to voter dashboard
+            window.location.href = "/voter/dashboard"; // Needs to be changed to redirect to voter dashboard
           }, 1000);
         } else {
           message.textContent = "Invalid username or password.";
@@ -48,7 +49,8 @@
     });
   </script>
 
-  <a th:href="@{/index}">Back to Homepage</a>
+  <a th:href="@{/index}">Go to Homepage</a><br><br>
+  <a th:href="@{/register}">Not registered? Click here</a><br><br>
 </div>
 </body>
 </html>
