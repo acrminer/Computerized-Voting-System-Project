@@ -32,7 +32,7 @@
     });
 
     async function loadElections() {
-        const res = await fetch("/elections"); // Adjust endpoint if needed
+        const res = await fetch("/elections");
         const data = await res.json();
         const list = document.getElementById("electionList");
 
