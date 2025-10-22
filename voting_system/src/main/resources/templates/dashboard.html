@@ -9,6 +9,64 @@
 <div class="dashboardContainer">
   <h1>Dashboard Page</h1>
   <h2>Welcome, <span th:text="${voter.username}">!</span></h2>
+    <h3>Create New Election</h3>
+    <form id="addElectionForm">
+        <label for="electionName">Election Name:</label>
+        <input type="text" id="electionName" name="electionName" required>
+
+        <label for="candidates">Candidates (comma-separated):</label>
+        <input type="text" id="candidates" name="candidates" required>
+
+        <button type="submit">Add Election</button>
+    </form>
+
+    <hr>
+
+    <h3>Existing Elections</h3>
+    <div id="electionList"></div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        loadElections();
+    });
+
+    async function loadElections() {
+        const res = await fetch("/elections"); // Adjust endpoint if needed
+        const data = await res.json();
+        const list = document.getElementById("electionList");
+
+        list.innerHTML = data.map(election => `
+      <div>
+        <strong>${election.electionName}</strong><br>
+        Candidates: ${Array.from(election.candidates).join(", ")}<br>
+        Votes: ${Object.entries(election.results).map(([name, votes]) => `${name}: ${votes}`).join(", ")}
+      </div>
+      <hr>
+    `).join("");
+    }
+
+    document.getElementById("addElectionForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const electionName = document.getElementById("electionName").value;
+        const candidates = document.getElementById("candidates").value.split(",").map(c => c.trim());
+
+        const response = await fetch("/elections", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ electionName, candidates })
+        });
+
+        if (response.ok) {
+            alert("Election added successfully!");
+            document.getElementById("addElectionForm").reset();
+            loadElections();
+        } else {
+            const error = await response.text();
+            alert("Error adding election: " + error);
+        }
+    });
+</script>
 </body>
 </html>
