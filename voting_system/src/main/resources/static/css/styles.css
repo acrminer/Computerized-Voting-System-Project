@@ -1,9 +1,9 @@
 body {
     display: flex;
-    justify-content: center;  /* horizontally centers */
-    align-items: center;      /* vertically centers */
-    height: 100vh;            /* make body full height of the viewport */
-    background: linear-gradient(to right, #828383, #b6cff3); /* optional background */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #828383, #b6cff3);
     font-family: "Apple SD Gothic Neo", sans-serif;
 }
 
@@ -21,6 +21,8 @@ button:hover {
     background-color: black;
     color: white;
 }
+
+
 
 input {
     background-color: white;
@@ -42,15 +44,27 @@ div {
     text-align: center;
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0078d7;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
+button {
+    background-color: rgb(193, 182, 182);
+    color: black;
+    border: 2px solid rgb(125, 121, 121);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #005fa3;
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+.loginContainer{
+    background: ghostwhite;
+    padding: 2rem;
+    width: 350px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
