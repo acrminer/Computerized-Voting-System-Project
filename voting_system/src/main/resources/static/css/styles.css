@@ -68,3 +68,53 @@ button:hover {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
+/* Added by Sergio */
+.dashboardContainer {
+  background: white;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#electionList {
+  max-height: 350px; /* or whatever height fits your layout */
+  overflow-y: auto;
+  padding-right: 10px; /* optional: avoids scrollbar overlap */
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#electionList > div {
+  width: 80%;
+  text-align: left;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+#electionList::-webkit-scrollbar {
+  width: 8px;
+}
+
+#electionList::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+#electionList::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+}
+
+#message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

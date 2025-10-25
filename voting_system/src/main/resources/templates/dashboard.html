@@ -20,6 +20,8 @@
         <button type="submit">Add Election</button>
     </form>
 
+    <p id="message"></p> <!-- Added by Sergio-->
+
     <hr>
 
     <h3>Existing Elections</h3>
@@ -60,11 +62,18 @@
 
         if (response.ok) {
             alert("Election added successfully!");
+            message.textContent = ""; <!-- Added by Sergio-->
             document.getElementById("addElectionForm").reset();
             loadElections();
         } else {
             const error = await response.text();
-            alert("Error adding election: " + error);
+
+            <!-- Edited by Sergio-->
+            <!-- alert("Error adding election: " + error);-->
+            const message = document.getElementById("message");
+            message.textContent = "Election already exists.";
+            message.style.color = "red";
+
         }
     });
 </script>
