@@ -11,6 +11,12 @@
         <input type="text" id="username" placeholder="Username" required><br><br>
         <input type="password" id="password" placeholder="Password" required><br><br>
         <input type="password" id="confirmPassword" placeholder="Confirm Password" required><br><br>
+        <select name="role" id="role" required>
+            <option value="">Select Role</option>
+            <option value="admin">Administrator</option>
+            <option value="voter">Voter</option>
+        </select><br><br>
+
         <button type="submit">Save</button>
     </form>
 
@@ -37,7 +43,8 @@
 
             const voter = {
                 username: document.getElementById('username').value,
-                password: password
+                password: password,
+                role: document.getElementById('role').value
             };
 
             const response = await fetch('/addVoter', {

@@ -17,12 +17,16 @@ public class Voter {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "role", nullable = false)
+    private String role;
+
     public Voter() {
     }
 
-    public Voter(String username, String password) {
+    public Voter(String username, String password, String role) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -47,5 +51,13 @@ public class Voter {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
