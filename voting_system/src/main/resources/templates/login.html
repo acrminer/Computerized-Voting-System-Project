@@ -35,11 +35,11 @@
       const message = document.getElementById('message');
       if (response.ok) {
         const text = await response.text();
-        if (text.includes("success")) {
+        if (text === 'Login successful!') {
           message.textContent = text;
           message.style.color = "green";
           setTimeout(() => {
-            window.location.href = "/voter/dashboard"; // Needs to be changed to redirect to voter dashboard
+            window.location.href = "/voter/dashboard";
           }, 1000);
         } else {
           message.textContent = "Invalid username or password.";

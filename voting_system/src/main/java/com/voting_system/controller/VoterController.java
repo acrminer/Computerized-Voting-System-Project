@@ -24,8 +24,12 @@ public class VoterController {
     @PostMapping("/loginVoter")
     @ResponseBody
     public String login(@RequestBody Voter voter, HttpSession session) {
-       boolean success = voterService.loginUser(voter.getUsername(), voter.getPassword());
-       session.setAttribute("voter", voter);
-       return success ? "Login successful!" : "Login failed";
+       Voter user = voterService.loginUser(voter.getUsername(), voter.getPassword());
+       if (user != null) {
+           session.setAttribute("voter", user);
+           return "Login successful!";
+       }
+       return "Login failed!";
+
     }
 }

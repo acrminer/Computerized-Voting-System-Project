@@ -39,8 +39,11 @@ public class VoterService {
         voterRepository.deleteById(voter.getId());
     }
 
-    public boolean loginUser(String username, String password) {
+    public Voter loginUser(String username, String password) {
         Voter voter = voterRepository.findByUsername(username);
-        return voter != null && passwordEncoder.matches(password, voter.getPassword());
+        if (voter != null && passwordEncoder.matches(password, voter.getPassword())) {
+            return voter;
+        }
+        return null;
     }
 }
