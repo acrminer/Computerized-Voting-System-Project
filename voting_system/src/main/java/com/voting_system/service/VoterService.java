@@ -30,6 +30,7 @@ public class VoterService {
         if (existingVoter != null) {
             throw new IllegalArgumentException("Username already exists");
         }
+        voter.setRole(Voter.Role.VOTER);
         voter.setPassword(passwordEncoder.encode(voter.getPassword()));
         return voterRepository.save(voter);
     }

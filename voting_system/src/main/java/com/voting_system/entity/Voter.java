@@ -17,12 +17,22 @@ public class Voter {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+    public enum Role {
+        VOTER,
+        ADMIN
+    }
+
     public Voter() {
     }
 
     public Voter(String username, String password) {
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -48,4 +58,13 @@ public class Voter {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }
