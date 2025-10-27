@@ -1,6 +1,9 @@
 package com.voting_system.entity;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 @Entity
 @Table(name = "votes")
 public class Vote {
@@ -9,20 +12,28 @@ public class Vote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    private Voter voter;
+    // Removed to keep anonymity
+    /* @ManyToOne(optional = false) // This means each vote is linked to one voter, and that voter must be present
+    private Voter voter; */
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false) // Each vote is also linked to one election, and again, it’s required
     private Election election;
 
     @Column(nullable = false)
     private String candidate;
 
-    public void setVoter(Voter voter) { this.voter = voter;}
+    // Optional: timestamp, status, etc.
+    @Column(nullable = false)
+    private LocalDateTime timestamp;
+
+    @Column(nullable = false, unique = true)
+    private String voteId = UUID.randomUUID().toString();
+
+    // public void setVoter(Voter voter) { this.voter = voter;}
 
     public void setElection(Election election) { this.election = election;}
 
     public void setCandidate(String candidate) { this.candidate = candidate;}
 
-    // Optional: timestamp, status, etc.
+    public void setTimestamp(LocalDateTime now) {  this.timestamp = now;}
 }
