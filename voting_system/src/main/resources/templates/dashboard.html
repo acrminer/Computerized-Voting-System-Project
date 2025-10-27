@@ -9,21 +9,24 @@
 <div class="dashboardContainer">
   <h1>Dashboard Page</h1>
   <h2>Welcome, <span th:text="${voter.username}">!</span></h2>
-    <h3>Create New Election</h3>
-    <form id="addElectionForm">
-        <label for="electionName">Election Name:</label>
-        <input type="text" id="electionName" name="electionName" required>
+    <p>Role detected: <span th:text="${voter.role}">unknown</span></p>
+    <div th:if="${voter.role == 'admin'}">
+        <h3>Create New Election</h3>
+        <form id="addElectionForm">
+            <label for="electionName">Election Name:</label>
+            <input type="text" id="electionName" name="electionName" required>
 
-        <label for="candidates">Candidates (comma-separated):</label>
-        <input type="text" id="candidates" name="candidates" required>
+            <label for="candidates">Candidates (comma-separated):</label>
+            <input type="text" id="candidates" name="candidates" required>
 
-        <button type="submit">Add Election</button>
-    </form>
+            <button type="submit">Add Election</button>
+        </form>
+    </div>
 
     <hr>
 
-    <h3>Existing Elections</h3>
-    <div id="electionList"></div>
+    <h3>Current Elections</h3>
+    <div class="electionList" id="electionList"></div>
 </div>
 
 <script>

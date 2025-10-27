@@ -79,3 +79,13 @@ select{
     font-size: 16px;
     transition: 0.3s;
 }
+
+.dashboardContainer{
+    background: ghostwhite;
+    padding: 2rem;
+    width: 350px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
