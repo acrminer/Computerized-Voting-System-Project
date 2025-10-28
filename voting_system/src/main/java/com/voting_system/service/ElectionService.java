@@ -72,6 +72,7 @@ public class ElectionService {
 
         results.put(candidate, results.getOrDefault(candidate, 0) + 1);
         election.setResults(results);
+        election.getVoters().add(username);
         electionRepository.save(election);
     }
 }
