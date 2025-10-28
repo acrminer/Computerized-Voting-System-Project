@@ -30,6 +30,11 @@ public class Election {
     @Column(name = "vote_count")
     private Map<String, Integer> results = new HashMap<>();
 
+    @ElementCollection
+    @CollectionTable(name = "election_voters", joinColumns = @JoinColumn(name = "election_id"))
+    @Column(name = "voter_username")
+    private Set<String> voters = new HashSet<>();
+
     public Election() {}
 
     public Election(String electionName) {
@@ -66,5 +71,13 @@ public class Election {
 
     public void setResults(Map<String, Integer> results) {
         this.results = results;
+    }
+
+    public Set<String> getVoters() {
+        return voters;
+    }
+
+    public void setVoters(Set<String> voters) {
+        this.voters = voters;
     }
 }

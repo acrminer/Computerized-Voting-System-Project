@@ -8,8 +8,8 @@
 <body>
 <div class="dashboardContainer">
   <h1>Dashboard Page</h1>
-  <h2>Welcome, <span th:text="${voter.username}">!</span></h2>
-    <p>Role detected: <span th:text="${voter.role}">unknown</span></p>
+  <h2>Welcome, <span th:text="${voter.username}", id="voterUsername">!</span></h2>
+    <p>Role detected: <span th:text="${voter.role}" id="voterRole">unknown</span></p>
     <div th:if="${voter.role == 'admin'}">
         <h3>Create New Election</h3>
         <form id="addElectionForm">
@@ -33,20 +33,61 @@
     document.addEventListener("DOMContentLoaded", () => {
         loadElections();
     });
+    async function vote(electionName, event) {
+        const button = event.target;
+        button.disabled = true;
+
+        const select = document.getElementById(`candidateSelect-${electionName}`);
+        const candidate = select.value;
+
+        try {
+            const response = await fetch(`/elections/${encodeURIComponent(electionName)}/vote`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ candidate })
+            });
+
+            if (response.ok) {
+                alert(`You voted for ${candidate} in ${electionName}!`);
+                loadElections();
+            } else {
+                const error = await response.text();
+                alert("Error submitting vote: " + error);
+            }
+        } catch (err) {
+            alert("Network error: " + err.message);
+        } finally {
+            button.disabled = false;
+        }
+    }
 
     async function loadElections() {
         const res = await fetch("/elections");
         const data = await res.json();
         const list = document.getElementById("electionList");
+        const username = document.getElementById("voterUsername").textContent.trim();
+        const role = document.getElementById("voterRole").textContent.trim();
 
-        list.innerHTML = data.map(election => `
-      <div>
-        <strong>${election.electionName}</strong><br>
-        Candidates: ${Array.from(election.candidates).join(", ")}<br>
-        Votes: ${Object.entries(election.results).map(([name, votes]) => `${name}: ${votes}`).join(", ")}
-      </div>
-      <hr>
-    `).join("");
+        list.innerHTML = data.map(election => {
+            const alreadyVoted = election.voters.includes(username);
+            return `
+          <div>
+            <strong>${election.electionName}</strong><br>
+            Candidates: ${Array.from(election.candidates).join(", ")}<br>
+            Votes: ${Object.entries(election.results).map(([name, votes]) => `${name}: ${votes}`).join(", ")}<br>
+            ${role === 'voter' ? `
+                ${alreadyVoted ? '<p>You have already voted in this election.</p>' : `
+                    <label for="candidateSelect-${election.electionName}">Choose candidate:</label>
+                    <select id="candidateSelect-${election.electionName}">
+                        ${Array.from(election.candidates).map(c => `<option value="${c}">${c}</option>`).join("")}
+                    </select>
+                    <button onclick="vote('${election.electionName}', event)">Vote</button>
+                `}
+            ` : ''}
+          </div>
+          <hr>
+        `;
+        }).join("");
     }
 
     document.getElementById("addElectionForm").addEventListener("submit", async (e) => {

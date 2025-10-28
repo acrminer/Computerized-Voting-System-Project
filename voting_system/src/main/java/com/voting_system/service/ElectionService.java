@@ -50,4 +50,28 @@ public class ElectionService {
         }
         return electionRepository.save(existingElection);
     }
+
+    public void vote(String electionName, String candidate, String username) {
+        Election election = electionRepository.findByElectionName(electionName);
+        if (election == null) {
+            throw new IllegalArgumentException("Election not found");
+        }
+        if(!election.getCandidates().contains(candidate)) {
+            throw new IllegalArgumentException("Candidate not found");
+        }
+
+        Map<String, Integer> results = election.getResults();
+        if (results == null) {
+            results = new HashMap<>();
+        }
+
+        // Check if user already voted
+        if (election.getVoters().contains(username)) {
+            throw new IllegalArgumentException("You have already voted");
+        }
+
+        results.put(candidate, results.getOrDefault(candidate, 0) + 1);
+        election.setResults(results);
+        electionRepository.save(election);
+    }
 }
