@@ -1,15 +1,16 @@
 package com.voting_system.controller;
 
 import com.voting_system.entity.Election;
+import com.voting_system.entity.Voter;
 import com.voting_system.service.ElectionService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ElectionController {
@@ -38,5 +39,31 @@ public class ElectionController {
     @GetMapping("/elections")
     public List<Election> getAllElections() {
         return electionService.getAll();
+    }
+
+    @PostMapping("/elections/{name}/vote")
+    public ResponseEntity<?> vote(
+            @PathVariable String name,
+            @RequestBody Map<String, String> payload,
+            HttpSession session) {
+
+        // Retrieve the logged-in voter from session
+        Voter voter = (Voter) session.getAttribute("voter");
+
+        if (voter == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("No voter logged in. Please log in first.");
+        }
+
+        String candidate = payload.get("candidate");
+
+        try {
+            electionService.vote(name, candidate, voter.getUsername());
+            return ResponseEntity.ok("Vote recorded successfully for " + candidate);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error recording vote.");
+        }
     }
 }
