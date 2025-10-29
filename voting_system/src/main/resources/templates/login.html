@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
-<div class="loginContainer">
-  <h1> Login</h1>
-  <form id="loginForm" class="loginForm">
-    <input type="text" id="username" placeholder="username" required><br><br>
-    <input  type="password" id="password" placeholder="password" required><br><br>
-    <button type="submit">Login</button>
-  </form><br>
 
-  <p id="message"></p>
+<div class="wrapper">
+  <form id="loginForm" action="">
+    <h1>Login</h1>
 
+    <div class="input-box">
+      <input id="username" type="text" placeholder="username" required>
+      <i class="bx bxs-user"></i>
+    </div>
 
-  <a th:href="@{/index}">Go to Homepage</a><br><br>
-  <a th:href="@{/register}">Not registered? Click here</a><br><br>
+    <div class="input-box">
+        <input id="password" type="password" placeholder="password" required>
+        <i class="bx bxs-lock-alt"></i>
+    </div>
+
+    <div class="message-box">
+        <p id="message"></p>
+    </div><br>
+
+    <button type="submit" class="btn">Login</button>
+
+    <div class="register-link">
+        <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+    </div>
+  </form>
 </div>
+
 <script th:src="@{/js/login.js}"></script>
 </body>
 </html>
