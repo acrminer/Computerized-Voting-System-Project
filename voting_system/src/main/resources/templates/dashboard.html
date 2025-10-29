@@ -27,9 +27,25 @@
 
     <h3>Current Elections</h3>
     <div class="electionList" id="electionList"></div>
+    <button id="logoutButton">Logout</button>
 </div>
 
+<!-- The scripts below handle logout, displaying
+all current elections, and giving the voters the
+ability to vote.
+    These scripts may be moved to a separate file
+to keep logic and frontend code separated -->
 <script>
+    // logout logic
+    document.getElementById("logoutButton").addEventListener("click", async () => {
+        try {
+            await fetch('/logout', { method: 'POST' });
+            window.location.href = '/login';
+        } catch (err) {
+            console.error('Logout failed', err);
+        }
+    });
+
     document.addEventListener("DOMContentLoaded", () => {
         loadElections();
     });
@@ -76,7 +92,7 @@
             Candidates: ${Array.from(election.candidates).join(", ")}<br>
             Votes: ${Object.entries(election.results).map(([name, votes]) => `${name}: ${votes}`).join(", ")}<br>
             ${role === 'voter' ? `
-                ${alreadyVoted ? '<p>You have already voted in this election.</p>' : `
+                ${alreadyVoted ? '<p>Vote casted. Thank you!</p>' : `
                     <label for="candidateSelect-${election.electionName}">Choose candidate:</label>
                     <select id="candidateSelect-${election.electionName}">
                         ${Array.from(election.candidates).map(c => `<option value="${c}">${c}</option>`).join("")}

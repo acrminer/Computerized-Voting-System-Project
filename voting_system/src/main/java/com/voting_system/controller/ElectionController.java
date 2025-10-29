@@ -47,7 +47,6 @@ public class ElectionController {
             @RequestBody Map<String, String> payload,
             HttpSession session) {
 
-        // Retrieve the logged-in voter from session
         Voter voter = (Voter) session.getAttribute("voter");
 
         if (voter == null) {
