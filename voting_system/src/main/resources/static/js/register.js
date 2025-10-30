@@ -24,7 +24,7 @@ form.addEventListener('submit', async (event) => {
         role: document.getElementById('role').value
     };
 
-    const response = await fetch('/addVoter', {
+    const response = await fetch('/addUser', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(voter)

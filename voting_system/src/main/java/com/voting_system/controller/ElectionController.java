@@ -1,7 +1,7 @@
 package com.voting_system.controller;
 
 import com.voting_system.entity.Election;
-import com.voting_system.entity.Voter;
+import com.voting_system.entity.User;
 import com.voting_system.service.ElectionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +47,17 @@ public class ElectionController {
             @RequestBody Map<String, String> payload,
             HttpSession session) {
 
-        Voter voter = (Voter) session.getAttribute("voter");
+        User user = (User) session.getAttribute("user");
 
-        if (voter == null) {
+        if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body("No voter logged in. Please log in first.");
+                    .body("No user logged in. Please log in first.");
         }
 
         String candidate = payload.get("candidate");
 
         try {
-            electionService.vote(name, candidate, voter.getUsername());
+            electionService.vote(name, candidate, user.getUsername());
             return ResponseEntity.ok("Vote recorded successfully for " + candidate);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

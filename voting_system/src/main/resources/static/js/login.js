@@ -8,7 +8,7 @@ form.addEventListener('submit', async (event) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const response = await fetch('/loginVoter', {
+    const response = await fetch('/loginUser', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ username, password }),
@@ -22,7 +22,7 @@ form.addEventListener('submit', async (event) => {
             message.textContent = text;
             message.style.color = "green";
             setTimeout(() => {
-                window.location.href = "/voter/dashboard";
+                window.location.href = "/user/dashboard";
             }, 1000);
         } else {
             message.textContent = "Invalid username or password.";

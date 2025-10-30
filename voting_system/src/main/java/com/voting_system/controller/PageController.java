@@ -1,6 +1,6 @@
 package com.voting_system.controller;
 
-import com.voting_system.entity.Voter;
+import com.voting_system.entity.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +36,13 @@ public class PageController {
         return "register";
     }
 
-    @GetMapping("/voter/dashboard")
+    @GetMapping("/user/dashboard")
     public String dashboardPage(HttpSession session, Model model) {
-        Voter voter = (Voter) session.getAttribute("voter");
-        if (voter == null) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
             return "redirect:/login";
         }
-        model.addAttribute("voter", voter);
+        model.addAttribute("user", user);
         return "dashboard";
     }
 }

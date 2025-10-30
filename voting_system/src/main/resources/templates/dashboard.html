@@ -8,9 +8,9 @@
 <body>
 <div class="dashboardContainer">
   <h1>Dashboard Page</h1>
-  <h2>Welcome, <span th:text="${voter.username}", id="voterUsername">!</span></h2>
-    <p>Role detected: <span th:text="${voter.role}" id="voterRole">unknown</span></p>
-    <div th:if="${voter.role == 'admin'}">
+  <h2>Welcome, <span th:text="${user.username}", id="voterUsername">!</span></h2>
+    <p>Role detected: <span th:text="${user.role}" id="voterRole">unknown</span></p>
+    <div th:if="${user.role == 'admin'}">
         <h3>Create New Election</h3>
         <form id="addElectionForm">
             <label for="electionName">Election Name:</label>

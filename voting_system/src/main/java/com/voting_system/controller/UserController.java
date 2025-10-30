@@ -1,7 +1,7 @@
 package com.voting_system.controller;
 
 import com.voting_system.entity.User;
-import com.voting_system.service.VoterService;
+import com.voting_system.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,23 +10,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class VoterController {
+public class UserController {
 
     @Autowired
-    private VoterService voterService;
+    private UserService userService;
 
-    @PostMapping("/addVoter")
+    @PostMapping("/addUser")
     public String addUser(@RequestBody User user) {
-        voterService.addUser(user);
+        userService.addUser(user);
         return "success";
     }
 
-    @PostMapping("/loginVoter")
+    @PostMapping("/loginUser")
     @ResponseBody
-    public String login(@RequestBody User voter, HttpSession session) {
-       User user = voterService.loginUser(voter.getUsername(), voter.getPassword());
-       if (user != null) {
-           session.setAttribute("voter", user);
+    public String login(@RequestBody User user, HttpSession session) {
+       User loginUser = userService.loginUser(user.getUsername(), user.getPassword());
+       if (loginUser != null) {
+           session.setAttribute("user", loginUser);
            return "Login successful!";
        }
        return "Login failed!";
