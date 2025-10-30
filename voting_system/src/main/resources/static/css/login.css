@@ -47,7 +47,6 @@
     width: 100%;
     height: 100%;
     background: transparent;
-    border: none;
     outline: none;
     border: 2px solid rgba(255,255,255,.2);
     border-radius: 40px;
@@ -68,9 +67,8 @@
     font-size: 20px;
 }
 
-
 *{
-    margin: 0;`
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
@@ -81,7 +79,9 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: grey;
+    background: url("../img/Ballot-Box.png")no-repeat top;
+    background-size: 175px;
+    background-color: rgb(158, 197, 236);
 }
 
 .wrapper{
@@ -93,6 +93,8 @@ body{
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
+    animation: rotating 4s linear infinite;
+    animation-delay: -1s;
 }
 
 .wrapper h1{
