@@ -38,5 +38,12 @@ form.addEventListener('submit', async (event) => {
 
     message.textContent = "Registration saved successfully!"
     message.style.color = "green";
+    setTimeout(() =>{
+        message.style.color= "black";
+        message.textContent = "Redirecting to login...";
+    }, 1000);
+    setTimeout(() => {
+        window.location.href = "/login";
+    }, 2000);
 
 });
