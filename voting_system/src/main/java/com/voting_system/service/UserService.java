@@ -1,5 +1,5 @@
 package com.voting_system.service;
-import com.voting_system.entity.Voter;
+import com.voting_system.entity.User;
 import com.voting_system.repository.VoterRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +17,7 @@ public class VoterService {
         this.voterRepository = voterRepository;
     }
 
-    public List<Voter> getAllUsers() {
+    public List<User> getAllUsers() {
         return voterRepository.findAll();
     }
 
@@ -25,24 +25,24 @@ public class VoterService {
         return voterRepository.findByUsername(username) != null;
     }
 
-    public Voter addUser(Voter voter) {
-        Voter existingVoter = voterRepository.findByUsername(voter.getUsername());
-        if (existingVoter != null) {
+    public User addUser(User user) {
+        User existingUser = voterRepository.findByUsername(user.getUsername());
+        if (existingUser != null) {
             throw new IllegalArgumentException("Username already exists");
         }
-        voter.setPassword(passwordEncoder.encode(voter.getPassword()));
-        voter.setRole(voter.getRole());
-        return voterRepository.save(voter);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(user.getRole());
+        return voterRepository.save(user);
     }
 
-    public void deleteUser(Voter voter) {
-        voterRepository.deleteById(voter.getId());
+    public void deleteUser(User user) {
+        voterRepository.deleteById(user.getId());
     }
 
-    public Voter loginUser(String username, String password) {
-        Voter voter = voterRepository.findByUsername(username);
-        if (voter != null && passwordEncoder.matches(password, voter.getPassword())) {
-            return voter;
+    public User loginUser(String username, String password) {
+        User user = voterRepository.findByUsername(username);
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user;
         }
         return null;
     }

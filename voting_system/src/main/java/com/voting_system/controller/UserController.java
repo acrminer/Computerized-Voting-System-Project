@@ -1,6 +1,6 @@
 package com.voting_system.controller;
 
-import com.voting_system.entity.Voter;
+import com.voting_system.entity.User;
 import com.voting_system.service.VoterService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +16,15 @@ public class VoterController {
     private VoterService voterService;
 
     @PostMapping("/addVoter")
-    public String addUser(@RequestBody Voter voter) {
-        voterService.addUser(voter);
+    public String addUser(@RequestBody User user) {
+        voterService.addUser(user);
         return "success";
     }
 
     @PostMapping("/loginVoter")
     @ResponseBody
-    public String login(@RequestBody Voter voter, HttpSession session) {
-       Voter user = voterService.loginUser(voter.getUsername(), voter.getPassword());
+    public String login(@RequestBody User voter, HttpSession session) {
+       User user = voterService.loginUser(voter.getUsername(), voter.getPassword());
        if (user != null) {
            session.setAttribute("voter", user);
            return "Login successful!";
