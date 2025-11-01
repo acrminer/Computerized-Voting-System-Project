@@ -57,6 +57,7 @@
 
 .input-box input::placeholder{
     color: #fff;
+    opacity: .5;
 }
 
 .input-box i{
@@ -79,8 +80,9 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url("../img/Ballot-Box.png")no-repeat top;
-    background-size: 175px;
+    background: url("../img/ballot.png")no-repeat top;
+    background-size: 150px;
+    background-position-y: 5px;
     background-color: rgb(158, 197, 236);
 }
 

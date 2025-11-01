@@ -61,7 +61,7 @@ async function loadElections() {
                     <select id="candidateSelect-${election.electionName}">
                         ${Array.from(election.candidates).map(c => `<option value="${c}">${c}</option>`).join("")}
                     </select>
-                    <button onclick="vote('${election.electionName}', event)">Vote</button>
+                    <button class="btn" onclick="vote('${election.electionName}', event)">Vote</button>
                 `}
             ` : ''}
           </div>

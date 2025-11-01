@@ -1,91 +1,184 @@
-body {
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.message-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(to right, #828383, #b6cff3);
-    font-family: "Apple SD Gothic Neo", sans-serif;
 }
 
-button {
-    background-color: rgb(193, 182, 182);
-    color: black;
-    border: 2px solid rgb(125, 121, 121);
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover {
-    background-color: black;
-    color: white;
-}
-
-
-
-input {
-    background-color: white;
-    color: black;
+.wrapper .btn{
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-div {
-    background: white;
-    padding: 2rem;
-    width: 350px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-button {
-    background-color: rgb(193, 182, 182);
-    color: black;
-    border: 2px solid rgb(125, 121, 121);
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover {
-    background-color: black;
-    color: white;
-}
-
-.loginContainer{
-    background: ghostwhite;
-    padding: 2rem;
-    width: 350px;
-    border-radius: 10px;
-    border: 1px solid gray;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-select{
-    background-color: white;
-    color: black;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     font-size: 16px;
-    transition: 0.3s;
+    color: #333;
+    font-weight: 600;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
-.dashboardContainer{
-    background: ghostwhite;
-    padding: 2rem;
-    width: 350px;
-    border-radius: 10px;
-    border: 1px solid gray;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.wrapper .btn:hover {
+    background: #333;
+    color: #fff;
+}
+
+.wrapper .register-link{
     text-align: center;
+    font-size: 14px;
+    margin: 20px 0 15px;
+}
+
+.wrapper .register-link p a{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.wrapper .register-link p a:hover{
+    text-decoration: underline;
+}
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box input::placeholder{
+    color: #fff;
+    opacity: .5;
+}
+
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: 175px;
+    background-color: rgb(158, 197, 236);
+}
+
+.wrapper{
+    width: 420px;
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    animation: rotating 4s linear infinite;
+    animation-delay: -1s;
+}
+
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box{
+    width: 100%;
+    position: relative;
+    margin: 30px 0;
+}
+@media (max-width: 480px) {
+    .wrapper {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .wrapper h1 {
+        font-size: 28px;
+    }
+
+    .input-box input {
+        font-size: 14px;
+        padding: 15px 40px 15px 15px;
+    }
+
+    .wrapper .btn {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .wrapper .register-link p a {
+        font-size: 13px;
+    }
+}
+
+.select-box {
+    width: 100%;
+    position: relative;
+    margin: 30px 0;
+}
+
+select {
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px 45px 10px 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    cursor: pointer;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus {
+    border-color: rgba(255,255,255,.5);
+    box-shadow: 0 0 10px rgba(255,255,255,.2);
+}
+
+.select-box::after {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #fff;
+    pointer-events: none;
+}
+
+.background-icon{
+    position: fixed;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 125px;
+    height: 135px;
+    z-index: 999;
+    opacity: .9;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
