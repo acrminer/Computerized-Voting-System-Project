@@ -19,6 +19,14 @@ async function vote(electionName, event) {
 
     const select = document.getElementById(`candidateSelect-${electionName}`);
     const candidate = select.value;
+    const username = document.getElementById("voterUsername").textContent.trim();
+
+    // Guard: ensure a real candidate is chosen
+      if (!candidate) {
+        alert("Please select a candidate before voting.");
+        button.disabled = false;
+        return;
+      }
 
     try {
         const response = await fetch(`/elections/${encodeURIComponent(electionName)}/vote`, {
@@ -58,8 +66,9 @@ async function loadElections() {
             ${role === 'voter' ? `
                 ${alreadyVoted ? '<p>Vote casted. Thank you!</p>' : `
                     <label for="candidateSelect-${election.electionName}">Choose candidate:</label>
-                    <select id="candidateSelect-${election.electionName}">
-                        ${Array.from(election.candidates).map(c => `<option value="${c}">${c}</option>`).join("")}
+                    <select id="candidateSelect-${election.electionName}" class="candidate-select" >
+                    	  <option value="" disabled selected>Select candidate</option>
+                    	  ${Array.from(election.candidates).map(c => `<option value="${c}">${c}</option>`).join("")}
                     </select>
                     <button class="btn" onclick="vote('${election.electionName}', event)">Vote</button>
                 `}
