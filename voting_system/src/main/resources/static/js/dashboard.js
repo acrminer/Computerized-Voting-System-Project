@@ -48,26 +48,45 @@ async function loadElections() {
     const username = document.getElementById("voterUsername").textContent.trim();
     const role = document.getElementById("voterRole").textContent.trim();
 
-    list.innerHTML = data.map(election => {
-        const alreadyVoted = election.voters.includes(username);
-        return `
-          <div>
-            <strong>${election.electionName}</strong><br>
-            Candidates: ${Array.from(election.candidates).join(", ")}<br>
-            Votes: ${Object.entries(election.results).map(([name, votes]) => `${name}: ${votes}`).join(", ")}<br>
-            ${role === 'voter' ? `
-                ${alreadyVoted ? '<p>Vote casted. Thank you!</p>' : `
-                    <label for="candidateSelect-${election.electionName}">Choose candidate:</label>
-                    <select id="candidateSelect-${election.electionName}">
-                        ${Array.from(election.candidates).map(c => `<option value="${c}">${c}</option>`).join("")}
-                    </select>
-                    <button class="btn" onclick="vote('${election.electionName}', event)">Vote</button>
-                `}
-            ` : ''}
-          </div>
-          <hr>
+    list.innerHTML = "";
+    const template = document.getElementById("electionTemplate");
+
+    data.forEach(election => {
+        const clone = template.content.cloneNode(true);
+        clone.querySelector(".election-name").textContent = election.electionName;
+
+        const resultsDiv = clone.querySelector(".results");
+        Object.entries(election.results).forEach(([name, votes]) => {
+            const line = document.createElement("div");
+            line.className = "result-line";
+            line.innerHTML = `
+            <span class="candidate-name">${name}: </span>
+            <span class="vote-count">${votes} votes</span>
         `;
-    }).join("");
+            resultsDiv.appendChild(line);
+        });
+
+        const votingSection = clone.querySelector(".voting-section");
+        const username = document.getElementById("voterUsername").textContent.trim();
+        const role = document.getElementById("voterRole").textContent.trim();
+        const alreadyVoted = election.voters.includes(username);
+
+        if (role === "voter") {
+            if (alreadyVoted) {
+                votingSection.innerHTML = "<p>Vote casted. Thank you!</p>";
+            } else {
+                votingSection.innerHTML = `
+                <label for="candidateSelect-${election.electionName}">Choose candidate:</label>
+                <select id="candidateSelect-${election.electionName}">
+                    ${election.candidates.map(c => `<option value="${c}">${c}</option>`).join("")}
+                </select>
+                <button class="btn" onclick="vote('${election.electionName}', event)">Vote</button>
+            `;
+            }
+        }
+
+        list.appendChild(clone);
+    });
 }
 
 document.getElementById("addElectionForm").addEventListener("submit", async (e) => {
