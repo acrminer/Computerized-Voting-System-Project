@@ -194,5 +194,9 @@ select:focus {
 }
 
 .vote-count{
-    color: #3b495b;
+    color: #000 !important;
+}
+
+.candidate-select {
+    color: #000 !important;
 }
