@@ -30,6 +30,11 @@
         </form>
     </div><br>
 
+    <!-- Audit Page Button (Admin Only) -->
+    <div th:if="${user.role == 'admin'}">
+        <a href="/audit" class="btn small">Go to Audit Page</a>
+    </div><br>
+
     <hr>
 
     <h3>Current Elections</h3>

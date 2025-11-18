@@ -1,7 +1,9 @@
 package com.voting_system.service;
 
 import com.voting_system.entity.Election;
+import com.voting_system.entity.VoteAudit;
 import com.voting_system.repository.ElectionRepository;
+import com.voting_system.service.AuditService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -13,10 +15,12 @@ public class ElectionService {
 
     private final ElectionRepository repo;
     private final ElectionRepository electionRepository;
+    private final AuditService auditService;
 
-    public ElectionService(ElectionRepository repo, ElectionRepository electionRepository) {
+    public ElectionService(ElectionRepository repo, ElectionRepository electionRepository, AuditService auditService) {
         this.repo = repo;
         this.electionRepository = electionRepository;
+        this.auditService = auditService;
     }
 
     public List<Election> getAll() {
@@ -74,5 +78,7 @@ public class ElectionService {
         election.setResults(results);
         election.getVoters().add(username);
         electionRepository.save(election);
+
+        auditService.logVoteAudit(electionName);
     }
 }
