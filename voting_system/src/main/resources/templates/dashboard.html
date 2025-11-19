@@ -11,7 +11,9 @@
   <h1>Dashboard</h1>
   <h2>Welcome, <span th:text="${user.username}" id="voterUsername"></span>!</h2>
     <p>Role detected: <span th:text="${user.role}" id="voterRole">unknown</span></p>
+
     <div th:if="${user.role == 'admin'}">
+        <p> </p>
         <hr>
         <form id="addElectionForm">
             <h3>Create New Election</h3>
